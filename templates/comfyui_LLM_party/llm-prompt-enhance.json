@@ -235,7 +235,7 @@
       },
       "title": "Prompt Enhancer",
       "widgets_values": [
-        "You are an expert prompt engineer for FLUX image generation. Given a simple description, output ONLY an enhanced detailed prompt in English. Include: subject details, lighting, composition, style, quality tags. Output the prompt only, no explanation.",
+        "You are an expert prompt engineer for FLUX image generation. Given a simple description, output ONLY an enhanced detailed prompt in the same language as the input. Include: subject details, lighting, composition, style, quality tags. Output the prompt only, no explanation.",
         "a cat sitting on a windowsill",
         0.7,
         "disable",

@@ -168,7 +168,7 @@
         {"name": "IMAGE", "type": "IMAGE", "links": [6], "slot_index": 0, "label": "IMAGE", "localized_name": "IMAGE"},
         {"name": "MASK", "type": "MASK", "links": null, "slot_index": 1, "label": "MASK", "localized_name": "MASK"}
       ],
-      "title": "上传参考图片 (人物外观)",
+      "title": "Upload Reference Image (Appearance)",
       "properties": {"Node name for S&R": "LoadImage"},
       "widgets_values": ["ref_image.png"]
     },
@@ -186,7 +186,7 @@
       "outputs": [
         {"name": "VIDEO", "type": "VIDEO", "links": [8], "slot_index": 0, "label": "VIDEO", "localized_name": "VIDEO"}
       ],
-      "title": "上传动作视频 (动作来源)",
+      "title": "Upload Motion Source Video",
       "properties": {"Node name for S&R": "LoadVideo"},
       "widgets_values": ["motion_source.mp4"]
     },
@@ -206,7 +206,7 @@
         {"localized_name": "audio", "name": "audio", "type": "AUDIO", "links": [30]},
         {"localized_name": "fps", "name": "fps", "type": "FLOAT", "links": null}
       ],
-      "title": "提取视频帧 + 音频",
+      "title": "Extract Video Frames + Audio",
       "properties": {"Node name for S&R": "GetVideoComponents"}
     },
     {
@@ -225,7 +225,7 @@
       "outputs": [
         {"name": "IMAGE", "type": "IMAGE", "links": [10], "slot_index": 0, "label": "IMAGE", "localized_name": "IMAGE"}
       ],
-      "title": "Canny 边缘检测 (预处理动作视频)",
+      "title": "Canny Edge Detection (Motion Video Preprocessing)",
       "properties": {"Node name for S&R": "Canny"},
       "widgets_values": [0.1, 0.6]
     },
@@ -244,7 +244,7 @@
       "outputs": [
         {"name": "CONDITIONING", "type": "CONDITIONING", "links": [3], "slot_index": 0, "label": "CONDITIONING", "localized_name": "CONDITIONING"}
       ],
-      "title": "正向提示词",
+      "title": "Positive Prompt",
       "properties": {"Node name for S&R": "CLIPTextEncode"},
       "widgets_values": ["a person performing the motion, smooth movement, high quality, cinematic lighting"],
       "color": "#232",
@@ -265,7 +265,7 @@
       "outputs": [
         {"name": "CONDITIONING", "type": "CONDITIONING", "links": [4], "slot_index": 0, "label": "CONDITIONING", "localized_name": "CONDITIONING"}
       ],
-      "title": "反向提示词",
+      "title": "Negative Prompt",
       "properties": {"Node name for S&R": "CLIPTextEncode"},
       "widgets_values": ["worst quality, blurry, distorted, static, jittery, watermark, low resolution, deformed limbs"],
       "color": "#322",
@@ -295,7 +295,7 @@
         {"name": "negative", "type": "CONDITIONING", "links": [21, 24], "slot_index": 1, "label": "negative", "localized_name": "negative"},
         {"name": "latent", "type": "LATENT", "links": [22], "slot_index": 2, "label": "latent", "localized_name": "latent"}
       ],
-      "title": "Wan 2.2 动作迁移",
+      "title": "Wan 2.2 Motion Transfer",
       "properties": {"Node name for S&R": "Wan22FunControlToVideo"},
       "widgets_values": [480, 832, 193, 1]
     },
@@ -392,7 +392,7 @@
       "outputs": [
         {"localized_name": "VIDEO", "name": "VIDEO", "type": "VIDEO", "links": [31]}
       ],
-      "title": "Create Video (含原视频音频)",
+      "title": "Create Video (with Source Audio)",
       "properties": {"Node name for S&R": "CreateVideo"},
       "widgets_values": [16]
     },
@@ -446,21 +446,21 @@
   ],
   "groups": [
     {
-      "title": "双模型 + wanBlockSwap + ModelSamplingSD3(shift=8)",
+      "title": "Dual Models + wanBlockSwap + ModelSamplingSD3(shift=8)",
       "bounding": [-30, -50, 960, 260],
       "color": "#3f789e",
       "font_size": 24,
       "flags": {}
     },
     {
-      "title": "用户输入 + Canny预处理",
+      "title": "User Inputs + Canny Preprocessing",
       "bounding": [-30, 520, 950, 540],
       "color": "#8A548B",
       "font_size": 24,
       "flags": {}
     },
     {
-      "title": "双模型两阶段采样 + 输出",
+      "title": "Dual-Model Two-Stage Sampling + Output",
       "bounding": [1060, -50, 1120, 510],
       "color": "#2E7D32",
       "font_size": 24,

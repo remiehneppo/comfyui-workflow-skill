@@ -13,7 +13,26 @@ Trigger when the user asks to:
 - Set up txt2img, img2img, img2vid, txt2vid workflows
 - Generate a ComfyUI JSON file
 
-Trigger keywords: comfyui, workflow, 工作流, 文生图, 图生图, 文生视频, 图生视频, txt2img, img2img, txt2vid, img2vid, upscale, 放大, inpaint, 重绘, controlnet, lora, sd3, flux, ltxv, mochi, cosmos, stable audio, 音频生成, hunyuan3d, 3d生成, stable cascade, 图生3d
+Trigger keywords: comfyui, workflow, text-to-image, image-to-image, text-to-video, image-to-video, txt2img, img2img, txt2vid, img2vid, upscale, inpaint, controlnet, lora, sd3, flux, ltxv, mochi, cosmos, stable audio, audio generation, hunyuan3d, 3d generation, stable cascade, image-to-3d, tạo ảnh, tạo ảnh từ mô tả, tạo ảnh từ chữ, chỉnh sửa ảnh, biến ảnh thành ảnh khác, biến ảnh thành video, tạo video từ mô tả, làm video, xóa vật thể, vẽ lại ảnh, làm ảnh nét hơn, phóng to ảnh, tạo nhạc, tạo mô hình 3D
+
+### Vietnamese Requests and Replies
+
+When the user writes in Vietnamese, understand everyday phrasing and reply in natural Vietnamese. Do not require users to know terms such as txt2img or inpainting:
+
+| Everyday request | Interpret as |
+|------------------|--------------|
+| "Tạo ảnh từ mô tả này" / "Vẽ giúp tôi..." | Text-to-image |
+| "Dùng ảnh này làm mẫu, tạo một ảnh khác" | Image-to-image |
+| "Làm ảnh này chuyển động" / "Biến ảnh này thành video" | Image-to-video |
+| "Tạo video theo mô tả này" | Text-to-video |
+| "Xóa người/vật này khỏi ảnh" / "Vẽ lại chỗ này" | Inpainting or object removal, depending on the requested result |
+| "Làm ảnh rõ hơn" / "Phóng to ảnh" | Upscaling |
+
+- Keep the conversation in the user's language. If they write in Vietnamese, explain the workflow and ask any necessary follow-up questions in Vietnamese.
+- Ask only for details that materially affect the workflow, such as the source image/video, desired result, model, or output size. If a detail is optional, choose a sensible default and mention it briefly instead of turning it into a question.
+- Keep ComfyUI identifiers, node names, model filenames, JSON keys, and required enum values exactly as expected by the workflow. Translate explanations and user-facing node titles only when doing so will not change required identifiers.
+- Write image and video prompts in the language the user used or explicitly requested. Do not translate Vietnamese prompts into English unless the user asks for translation.
+- Prefer familiar wording such as "tạo ảnh từ mô tả", "biến ảnh thành video", "xóa vật thể", and "làm ảnh rõ hơn". Avoid literal technical translations when ordinary Vietnamese is clearer.
 
 ## Instructions
 
@@ -94,7 +113,7 @@ CLIPVisionEncode:       0=CLIP_VISION_OUTPUT
 
 ### LLM / Text Generation Nodes (comfyui_LLM_party)
 
-ComfyUI integrates LLM via **comfyui_LLM_party** custom node package (需安装: https://github.com/heshengtao/comfyui_LLM_party).
+ComfyUI integrates LLMs via the **comfyui_LLM_party** custom node package (install it from https://github.com/heshengtao/comfyui_LLM_party).
 
 **IMPORTANT:** When user requests a workflow with LLM (script generation, character parsing, storyboard breakdown, prompt enhancement), you MUST:
 1. **Ask the user which LLM provider they want to use** (OpenAI / Claude / Gemini / Ollama / DeepSeek / other)
@@ -382,19 +401,19 @@ Use this reference table for common models:
 After the workflow JSON, output like this:
 
 ```
-## 模型下载指南
+## Model Download Guide
 
-本工作流需要以下模型文件：
+This workflow requires the following model files:
 
-1. **wan2.2_t2v_14b.safetensors** (扩散模型)
-   - 放置目录: `ComfyUI/models/diffusion_models/`
-   - 下载地址: https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged
+1. **wan2.2_t2v_14b.safetensors** (diffusion model)
+   - Directory: `ComfyUI/models/diffusion_models/`
+   - Download: https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged
 
-2. **umt5_xxl_fp16.safetensors** (文本编码器)
-   - 放置目录: `ComfyUI/models/text_encoders/`
-   - 下载地址: https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged
+2. **umt5_xxl_fp16.safetensors** (text encoder)
+   - Directory: `ComfyUI/models/text_encoders/`
+   - Download: https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged
 
 ...
 
-💡 提示: 可使用 `huggingface-cli download` 命令批量下载
+Tip: use `huggingface-cli download` to download multiple files at once.
 ```

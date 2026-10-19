@@ -416,7 +416,7 @@
       },
       "title": "Stage 2: Extract Characters",
       "widgets_values": [
-        "From the script below, extract the main character. Output ONLY a detailed visual description suitable for AI image generation: appearance, clothing, expression, pose. English only, single paragraph, no JSON.",
+        "From the script below, extract the main character. Output ONLY a detailed visual description suitable for AI image generation: appearance, clothing, expression, pose. Use the same language as the script. Write one paragraph, no JSON.",
         "",
         0.7,
         "disable",
@@ -593,7 +593,7 @@
       },
       "title": "Stage 3: Generate Storyboard",
       "widgets_values": [
-        "From the script below, create exactly 3 video shots. For each shot, output ONE line with a detailed video generation prompt describing scene action, camera movement, lighting, mood. English only, one line per shot, no numbering.",
+        "From the script below, create exactly 3 video shots. For each shot, output ONE line with a detailed video generation prompt describing scene action, camera movement, lighting, mood. Use the same language as the script, one line per shot, no numbering.",
         "",
         0.7,
         "disable",
