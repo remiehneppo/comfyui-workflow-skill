@@ -31,7 +31,7 @@ When the user writes in Vietnamese, understand everyday phrasing and reply in na
 - Keep the conversation in the user's language. If they write in Vietnamese, explain the workflow and ask any necessary follow-up questions in Vietnamese.
 - Ask only for details that materially affect the workflow, such as the source image/video, desired result, model, or output size. If a detail is optional, choose a sensible default and mention it briefly instead of turning it into a question.
 - Keep ComfyUI identifiers, node names, model filenames, JSON keys, and required enum values exactly as expected by the workflow. Translate explanations and user-facing node titles only when doing so will not change required identifiers.
-- Write image and video prompts in the language the user used or explicitly requested. Do not translate Vietnamese prompts into English unless the user asks for translation.
+- **MANDATORY**: Always translate image and video prompts (positive and negative) into clear, descriptive English before placing them in workflow nodes (CLIPTextEncode). Diffusion text encoders (T5, CLIP-L, SDXL CLIP) require English for accurate image generation. If the user prompts in Vietnamese or another language, explain in Vietnamese but put the translated English prompt into the workflow.
 - Prefer familiar wording such as "tạo ảnh từ mô tả", "biến ảnh thành video", "xóa vật thể", and "làm ảnh rõ hơn". Avoid literal technical translations when ordinary Vietnamese is clearer.
 
 ## Instructions
