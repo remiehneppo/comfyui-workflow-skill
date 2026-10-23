@@ -290,10 +290,25 @@ CLIPTextEncode_party(enhanced_prompt) → CONDITIONING → KSampler → image
 | Cosmos Text to Video | `templates/cosmos-txt2vid.json` | Cosmos text-to-video (1280x704, 121 frames) |
 | Cosmos Image to Video | `templates/cosmos-img2vid.json` | Cosmos image-to-video with start frame |
 
-#### Upscale
+#### Upscale & Super-Resolution
 | Template | File | Description |
 |----------|------|-------------|
-| Image Upscale | `templates/upscale-model.json` | Upscale with model (RealESRGAN etc.) |
+| Image Upscale | `templates/upscale-model.json` | Upscale with model (4x-UltraSharp, RealESRGAN) |
+
+#### Background Removal
+| Template | File | Description |
+|----------|------|-------------|
+| BiRefNet Cutout | `templates/birefnet-cutout.json` | High-fidelity alpha cutout and transparent PNG output |
+
+#### Production-Tuned Recipes (Tested & Recommended)
+| Architecture | Primary Nodes | Recommended Settings | Key Use Case |
+|---|---|---|---|
+| **SDXL Photorealism** | `CheckpointLoaderSimple` | Sampler: `dpmpp_2m`, Scheduler: `karras`, Steps: 25, CFG: 6.5, 1024x1024 | Commercial product, portrait, realism (~6s) |
+| **FLUX.1 Dev (Q8 GGUF)** | `UnetLoaderGGUF`, `DualCLIPLoaderGGUF`, `FluxGuidance` | Sampler: `euler`, Scheduler: `simple`, Steps: 20, Guidance: 3.5 | SOTA prompt adherence, intricate compositions |
+| **FLUX.1 Schnell (Q8 GGUF)** | `UnetLoaderGGUF`, `DualCLIPLoaderGGUF`, `FluxGuidance` | Sampler: `euler`, Scheduler: `simple`, Steps: 4, Guidance: 3.5 | Fast draft, interactive rendering (~15-18s) |
+| **FLUX + Design LoRAs** | `LoraLoaderModelOnly` + FLUX pipeline | Sampler: `euler`, Scheduler: `simple`, LoRA Strength: 0.8-1.0 | Logo, Vector, 3D icons, graphic design |
+| **BiRefNet Alpha Cutout** | `LoadBackgroundRemovalModel`, `RemoveBackground`, `JoinImageWithAlpha` | Direct model inference (~1.2s) | Clean hair/edge extraction, transparent PNG |
+| **4x-UltraSharp** | `UpscaleModelLoader`, `ImageUpscaleWithModel` | Model: `4x-UltraSharp.pth` | Texture restoration, crisp edge sharpening |
 
 #### Audio
 | Template | File | Description |
